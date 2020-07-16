@@ -145,7 +145,7 @@ void Event(){
 		range=range+0.5;
 	}
 
-	//Use the ProjiectionX/Y() function.
+	//Use the ProjiectionX/Y() function. no used this commond.
 	/*
 	   double rangemin=-20;
 	   TCanvas *c4=new TCanvas("c4","Event",400,400);
