@@ -1,0 +1,58 @@
+*decode
+确定好测试区域，设置安排读出电子学地址，知道对应的ALTRO，ch。在当前坐标系下对其进行strip编号。
+然后写入strip_map_2.txt
+
+***CutCondition******
+
+挑选cut条件一些ADC，TB，strip关系图。
+
+
+
+*** data *****
+
+1. GetSignalEventNum.C
+遍历所有源文件，去除过阈，部分板子相应，宇宙线簇射事例。挑选合格的event写入signalEvent_***_***.txt
+
+2. GetEventData2
+遍历所有源文件，将上面满足条件的event重新编号，写入data_pr*.txt。
+
+3. SetDataToOne.C
+由于电子学取数事例数低，将原数据分段进行以上1，2两步存储，因此此文件是将以上所有数据合成一个data_All.txt
+且对其event重新编号。
+
+4. Pedestal.C
+将电子学读出的基值和噪音进行读出，画出ADC_TimeBin关系图；
+
+
+
+*** Aligment ***
+1. Position.C
+重心法计算每一层板子响应的hit点的位置，并写入XYposition.root；
+以及strip相应的条数，与其对应的sumADC，写入ThreeSumADC.root;
+
+2. Position_20012.C 
+对某个异常事例的分析，查看。
+
+3. Event.C
+Event QA, 取出N_sigma范围内的event,写入./RealEvent/RealEventTree.root;  RealEventTree_old.root是没切片之前全部event信息。横轴切片投影，写入./EventQA/**.pdf
+
+4. ScanParameters.C
+使用最笨的方法对deltaX2位移和旋转角度angle设置一定的范围，然后设定一个步伐，进行扫描。结果不尽理想=_=
+将一些结果图片存储在./ScanPar中
+
+5. pr.C
+一直不断改进的，position resolution 的方法，垂直事例挑选。
+
+6. main.C
+使用TMinuit的方法来尝试修正；x方向。加Z方向的修正；
+
+7. main2.C
+不加Z方向修正以及不做修正结果
+
+8. main3.C
+一些尝试
+
+9. main_ver.C
+垂直事例的挑选后的。
+
+10. prX， prY是打算对x，y方向的分析分开。与5-8功能一样 
